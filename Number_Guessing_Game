@@ -1,1 +1,68 @@
 
+
+import random
+import time
+
+class Guessgame:
+	def __init__(self,key_value):
+		self.key=key_value
+		
+	def play(self,max_attempt):
+		
+		attempt=0
+		start_time = time.time()
+		while attempt<max_attempt:
+			try:
+				
+				number=int(input("Enter you Guess number (1 - 100): "))
+				attempt+=1
+				
+				if number==self.key:
+					print(f"\n\t 🎉 Congratulations! You guessed the correct number. At the attempt of  {attempt}/{max_attempt}\n\t Remaing Attempt is ",max_attempt-attempt)
+					end_time = time.time()
+					print("\n\tTime Taken", round(end_time - start_time, 2),"sec")
+					break
+				elif  number < self.key:
+				 	print(f"Your Guess number is low and the attempt was {attempt}/{max_attempt}") 
+				 
+				else:
+				 	print(f"Your Guess number is high and the attempt was {attempt}/{max_attempt}")
+			except ValueError as e:
+				print("------- ENTER THE NUMBER -------")
+				
+		else:
+			print("\n\t\tGAME OVER\n")
+			answer_show=input("\tIf you want to show the answer (yes/no) : ").lower()
+			print(f"\tThe Correct answer is {self.key}") if answer_show=="yes" else print('\t\tTHANK YOU')
+	
+
+	
+			
+if __name__=="__main__":
+	
+	print("\t\tNOW WE PLAY GUESSING GAME\n")
+	print("\tRULE :\n\t\t ✓ HARD : 5 attempts \n\t\t ✓ MEDIUM : 8 attempts \n\t\t ✓ EASY : 10 attempts \n\t\t ✓ range betweem 1-100")
+	try:
+		mode=int(input("\nMODE IS HARD = 1 | MEDIUM = 2 | EASY = 3 : "))
+		
+		if mode==1:
+			random_number=random.randint(1,100)
+			game=Guessgame(random_number)
+		
+			print("\n\t\tWELCOME YOU HAVE 5 ATTEMPT\n ")
+			game.play(5)
+		elif mode==2:
+			random_number=random.randint(1,100)
+			game=Guessgame(random_number)
+			print("\n\t\tWELCOME YOU HAVE 8 ATTEMPT\n ")
+			game.play(8)
+		elif mode==3:
+			random_number=random.randint(1,100)
+			game=Guessgame(random_number)
+			print("\n\t\tWELCOME YOU HAVE 10 ATTEMPT\n ")
+			game.play(10)
+		else:
+			print("Option 1, 2, 3")
+			
+	except ValueError:
+		print("ENTER VALUE")
